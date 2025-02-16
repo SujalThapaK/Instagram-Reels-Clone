@@ -37,3 +37,37 @@ html::-webkit-scrollbar, body::-webkit-scrollbar {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+@keyframes gradientAnimation {
+  0% {
+    background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899);
+    background-size: 200% 200%;
+  }
+  50% {
+    background: linear-gradient(45deg, #8b5cf6, #ec4899, #3b82f6);
+    background-size: 200% 200%;
+  }
+  100% {
+    background: linear-gradient(45deg, #ec4899, #3b82f6, #8b5cf6);
+    background-size: 200% 200%;
+  }
+}
+
+.shop-now-button {
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899);
+  background-size: 200% 200%;
+  animation: gradientAnimation ease infinite;
+  transition: transform 0.2s ease-in-out;
+}
+
+.shop-now-button:hover {
+  transform: scale(1.05);
+}

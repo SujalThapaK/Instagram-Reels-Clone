@@ -14,4 +14,23 @@ export default {
     },
   },
   plugins: [],
+  theme: {
+    extend: {
+      animation: {
+        gradientBorder: 'gradientBorder 3s ease 1', // Runs once for 3 seconds
+      },
+      keyframes: {
+        gradientBorder: {
+          '0%': {
+            'border-image': 'linear-gradient(90deg, rgba(255, 0, 150, 1) 0%, rgba(0, 204, 255, 1) 100%)',
+            'border-image-slice': 1,
+          },
+          '100%': {
+            'border-image': 'linear-gradient(90deg, rgba(0, 204, 255, 1) 0%, rgba(255, 0, 150, 1) 100%)',
+            'border-image-slice': 1,
+          },
+        },
+      },
+    },
+  },
 };
