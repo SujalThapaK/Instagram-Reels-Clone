@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, Suspense } from "react";
 import { useSearchParams } from "next/navigation"; // For Next.js URL parameters
 import {
   collection,
@@ -416,13 +416,12 @@ function VideoReel({ video }) {
     </div>
   );
 }
-
-export default function Home() {
+function HomeContent() {
   const searchParams = useSearchParams();
-  const targetVideoId = searchParams.get("videoId"); // e.g., ?videoId=abc123
+  const targetVideoId = searchParams.get("videoId");
   const [videos, setVideos] = useState([]);
   const sentinelRef = useRef(null);
-  const hasScrolled = useRef(false); // Track if we've already scrolled
+  const hasScrolled = useRef(false);
 
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, "reels"), (snapshot) => {
@@ -435,7 +434,6 @@ export default function Home() {
     return () => unsubscribe();
   }, []);
 
-  // Once videos are loaded, scroll to the video with the matching ID (only once)
   useEffect(() => {
     if (videos.length && targetVideoId && !hasScrolled.current) {
       const element = document.getElementById(targetVideoId);
@@ -455,7 +453,7 @@ export default function Home() {
         <div className="relative flex flex-col w-full h-[75vh] overflow-auto hide-scrollbar snap-y snap-mandatory">
           {videos.map((video) => (
             <div
-              id={video.id} // assign an id for scrolling
+              id={video.id}
               key={video.id}
               className="snap-start w-full h-[75vh] flex items-center justify-center mb-2"
             >
@@ -468,4 +466,11 @@ export default function Home() {
       </main>
     </div>
   );
+}
+
+export default function Home() { return (
+  <Suspense fallback={<div>Loading...</div>}>
+    <HomeContent />
+  </Suspense>
+);
 }
