@@ -30,3 +30,14 @@ Once this is done, the videos themselves are loaded in using the associated vide
 <b>3. Interacting with Videos:</b> <br/>Users can then browse through, like and share every video within the application. Metadata affected by user interactions (ex. Liking a video) results in update operations being performed on the firestore database. Every video also has a Shop Now button clicking which will take the user to the web page of the brand associated with the product.
 
 <b>4. Uploading your own Videos:</b> <br/>Users can also add their own videos to the platform, though the video will be displayed in a 9:16 frame and metadata information such as the Video Title, Shop URL and desired Tags (optional). The video provided by the user will be uploaded to the Google Cloud Storage bucket, and the videoURL will be used as a field in the construction of another videoReel component. Once this process is complete, the user will be provided with a shareable link to the product reel.
+
+## Run locally
+For running the project locally, follow the following steps:
+- Download and Unzip the project.
+- Open a terminal within the reelsclone directory
+- Create a .env file with the following variables:<br/><br/>
+  ![image](https://github.com/user-attachments/assets/34d07513-ec96-45a2-951f-49d99bca9ea7)
+  <br/><br/>
+Note: You will have to create a firebase project for some of the specified values, if you have not already.
+- Build the docker file using the following command:<br/><b>docker build -t nextjs-video-app .</b>
+- Run the docker file using the following command:<br/><b>docker run -p 3000:3000 nextjs-video-app </b>
